@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "~/src/*": ["src/*"]
+    },
+    "target": "es5",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strictNullChecks": true,
+    "resolveJsonModule": true,
+    "removeComments": false,
+    "noUnusedLocals": false,
+    "downlevelIteration": true,
+    "jsx": "react",
+    "lib": ["dom", "es2019"]
+  },
+  "files": ["./node_modules/@kintone/dts-gen/kintone.d.ts"],
+  "include": ["./src/**/*"]
+}

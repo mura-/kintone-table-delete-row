@@ -1,0 +1,21 @@
+{
+  "manifest_version": 1,
+  "version": 1,
+  "type": "APP",
+  "name": {
+    "ja": "テーブル1行を削除プラグイン",
+    "en": "テーブル1行を削除プラグイン"
+  },
+  "description": {
+    "ja": "単純に kintone テーブルの 2 行目を削除するためのプラグインです。標準では、テーブルに 1 行しかない場合は行の削除は不可能なため。",
+    "en": "単純に kintone テーブルの 2 行目を削除するためのプラグインです。標準では、テーブルに 1 行しかない場合は行の削除は不可能なため。"
+  },
+  "icon": "image/icon.png",
+  "desktop": {
+    "js": ["dist/main.bundle.js"]
+  },
+  "config": {
+    "html": "html/config.html",
+    "js": ["dist/config.bundle.js"]
+  }
+}

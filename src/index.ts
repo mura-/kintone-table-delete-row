@@ -2,24 +2,32 @@
   kintone.events.on(['app.record.create.show', 'app.record.edit.show'], (event) => {
 
     // すべてのテーブルを取得し監視する
-    const tableBodies = document.querySelectorAll<HTMLTableElement>('table.subtable-gaia > tbody') 
+    const tableBodies = document.querySelectorAll<HTMLTableElement>('table.subtable-gaia > tbody')
     tableBodies.forEach((tableBody) => {
 
-      let observer = new MutationObserver(mutationRecords => {
-        switch (tableBody.rows.length) {
-          // TODO: 0の場合にthにボタンを表示する処理
-          case 1: {
-            // 削除ボタンを取得し表示させる
-            const removeRowButton = tableBody.querySelector<HTMLButtonElement>('tr > td.subtable-operation-gaia > button.remove-row-image-gaia');
-            if(removeRowButton) removeRowButton.style.display = 'inline-block';
+      // 削除ボタンを強制的に表示する関数
+      const forceShowDeleteButtons = () => {
+        const removeRowButtons = tableBody.querySelectorAll<HTMLButtonElement>('tr > td.subtable-operation-gaia > button.remove-row-image-gaia');
+        removeRowButtons.forEach((button) => {
+          if (button.style.display === 'none' || button.style.display === '') {
+            button.style.display = 'inline-block';
           }
-          default:
-            return;
-        }
+        });
+      };
+
+      // 初回表示時に削除ボタンを表示
+      forceShowDeleteButtons();
+
+      // テーブル内の変更を監視（行の追加・削除）
+      const tableObserver = new MutationObserver(() => {
+        forceShowDeleteButtons();
       });
-    
-      observer.observe(tableBody, {
+
+      tableObserver.observe(tableBody, {
         childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['style']
       });
     });
 
